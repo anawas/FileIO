@@ -26,7 +26,7 @@
         }
     }
     
-    private static void WorkinWithDirs()
+    private static void WorkingWithDirs()
     {
         foreach (string entry in Directory.GetDirectories(@"C:\"))
         {
@@ -49,7 +49,7 @@
     public static void Main()
     {
         // UsingFile();
-        WorkinWithDirs();
+        WorkingWithDirs();
     }
 
 
