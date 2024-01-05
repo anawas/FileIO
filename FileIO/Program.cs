@@ -46,10 +46,44 @@
         Console.WriteLine("{0} entry {1} was created on {2:D}",entryType, fsi.FullName, fsi.CreationTime);
     }
 
+    private static void HandlingBinaryFiles()
+    {
+        string userDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string fileName = $"{userDocuments}\\data.bin";
+
+        Console.WriteLine($"Writing binary output to {fileName}");
+        using (var stream = File.Open(fileName, FileMode.Create))
+        {
+            using (var writer = new BinaryWriter(stream, System.Text.Encoding.UTF8, false)) {
+                double result = 1.0;
+                for (int i = 0; i < 10; i++)
+                {
+                    writer.Write(result);
+                    result *= 10.0;
+                }
+            }
+        }
+
+        using (var stream = File.Open(fileName, FileMode.Open))
+        {
+            using (var binReader = new BinaryReader(stream, System.Text.Encoding.UTF8, false))
+            {
+                double result = 0.0;
+                for (int i = 0; i < 10; i++)
+                {
+                    result = binReader.ReadDouble();
+                    Console.WriteLine($"Number {i}: {result}");
+                }
+            }
+        }
+
+    }
+
     public static void Main()
     {
         // UsingFile();
-        WorkingWithDirs();
+        // WorkingWithDirs();
+        HandlingBinaryFiles();
     }
 
 
